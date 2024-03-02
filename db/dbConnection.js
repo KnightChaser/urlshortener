@@ -2,7 +2,7 @@ mysql2 = require("mysql2");
 dotenv = require("dotenv");
 dotenv.config();
 
-const dbSession = mysql.createPool({
+const dbSession = mysql2.createPool({
     host: process.env.MYSQL_DB_HOST,
     user: process.env.MYSQL_DB_USER,
     password: process.env.MYSQL_DB_PASSWORD,
@@ -10,4 +10,4 @@ const dbSession = mysql.createPool({
     connectionLimit: 10
 });
 
-export default dbSession;
+module.exports = dbSession;

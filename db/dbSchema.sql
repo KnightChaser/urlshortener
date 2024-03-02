@@ -1,8 +1,8 @@
 -- A Database schema for URLShortener service database
 
 CREATE TABLE urlshortener.urls (
-    uuid VARCHAR(36) PRIMARY KEY,
-    longUrl TEXT NOT NULL,
-    shortUrl TEXT NOT NULL,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  id SERIAL PRIMARY KEY AUTO_INCREMENT,
+  longUrl VARCHAR(255) NOT NULL,
+  shortUrl VARCHAR(255) NOT NULL,
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
