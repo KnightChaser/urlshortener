@@ -1,7 +1,7 @@
 express = require("express");
 dotenv = require("dotenv");
 path = require("path");
-shorten = require("./shorten");
+shortener = require("./shorten");
 dotenv.config();
 
 const app = express();
@@ -21,10 +21,10 @@ app.get("/", (request, response) => {
 // Get the original URL from the input field
 app.get("/shorten", (request, response) => {
     var longUrl = request.query.longUrl;
-    shorten(longUrl)
+    shortener.shortenURL(longUrl)
         .then(shortenedUrl => {
             response.status(200).json({
-                shortenedUrl: shortenedUrl
+                shortenedUrl: `${process.env.SITE_DOMAIN_PREFIX}/go/${shortenedUrl}`
             });
         })
         .catch(error => {
@@ -32,5 +32,22 @@ app.get("/shorten", (request, response) => {
             response.status(500).json({
                 error: "Internal server error"
             });
+        });
+});
+
+// Redirect to the original URL
+app.get("/go/:shortUrl", (request, response) => {
+    var shortUrl = request.params.shortUrl;
+    shortener.queryLongURLExistence(shortUrl)
+        .then(longUrl => {
+            if (longUrl) {
+                response.redirect(longUrl);
+            } else {
+                response.status(404).send("URL not found");
+            }
+        })
+        .catch(error => {
+            console.error("Error redirecting to the URL:", error);
+            response.status(500).send("Internal server error");
         });
 });
