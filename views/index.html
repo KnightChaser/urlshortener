@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URL Shortener</title>
     <link rel="stylesheet" href="style.css">
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="container">
-        <h1>URL Shortener</h1>
+        <h1>A simple URL Shortener</h1>
         <form id="urlForm">
             <label for="originalUrl">Enter your long URL:</label>
             <input type="url" id="originalUrl" placeholder="https://example.com" required>
@@ -19,6 +21,8 @@
             <input type="text" id="shortenedUrl" readonly>
         </div>
     </div>
+    <script src="toast.js"></script>
     <script src="index.js"></script>
+    <script src="validation.js"></script>
 </body>
 </html>
